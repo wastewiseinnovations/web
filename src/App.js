@@ -15,7 +15,7 @@ const LazyResults = lazy(() => import("./pages/Results"));
 
 function App() {
   return (
-    <Router>
+    <Router basename='/web'>
     <Routes>
       <Route path="/" element={<HomePage />} />
       <Route path="/simulator" element={<Simulator />} />
