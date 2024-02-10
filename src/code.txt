@@ -1,0 +1,35 @@
+<FieldSet>
+                    <legend>Opções</legend>
+                    <label>
+                        <input type='radio' value='opção 1' name='options' checked={state.options==='opção 1'} onChange={handleInput}/>
+                        Opção 1
+                    </label>
+                    <label>
+                        <input type='radio' value='opção 2' name='options' checked={state.options==='opção 2'} onChange={handleInput}/>
+                        Opção 2
+                    </label>
+                </FieldSet>
+
+                 <Button onMouseEnter={onHover} onMouseLeave={onHover}>SIMULE AQUI</Button>
+
+                 <div id='print'>
+      <h1>DOWNLOADED COMPONENT</h1>
+      <button type='button' onClick={handleDownload}>Save</button>
+    </div>
+
+
+    const handleDownload = () => {
+    const date = new Date().toDateString();
+    const input = document.getElementById('print'); 
+    html2canvas(input).then((canvas) => {
+      const imgData = canvas.toDataURL('image/jpeg');
+      const pdf = new jsPDF();
+      const filename = `Wastewise-Simulador-${date}.pdf`;
+      pdf.addImage(imgData, 'PNG', 0, 0);
+      pdf.save(filename); 
+    });
+  };
+
+  <Button onClick={showResults}>SIMULAR</Button>
+
+  <Form ref={childRef} showResults={openModal}/>

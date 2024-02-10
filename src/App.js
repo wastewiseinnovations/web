@@ -1,24 +1,32 @@
-import logo from './logo.svg';
 import './App.css';
+import NavBar from './components/nav/NavBar';
+import { Routes, Route, BrowserRouter as Router} from 'react-router-dom';
+import SideBar from './components/sidebar/SideBar';
+import HomePage from './pages/Homepage';
+import { Simulator } from './pages/Simulator';
+import Form from './components/form/Form';
+import { Suspense, lazy } from 'react';
+import Loading from './components/Loading';
+import { Another } from './pages/Another';
+import HelpPage from './pages/HelpPage';
+
+const LazyResults = lazy(() => import("./pages/Results"));
+
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Router>
+    <Routes>
+      <Route path="/" element={<HomePage />} />
+      <Route path="/simulator" element={<Simulator />} />
+      <Route path="/help" element={<HelpPage />} />
+      <Route path='/simulator/results' element={
+        <Suspense fallback={<Loading />}>
+          <LazyResults />
+        </Suspense>
+      } />
+    </Routes>
+    </Router>
   );
 }
 
